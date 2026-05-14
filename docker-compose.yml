@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+
+  # ── PostgreSQL Database ───────────────────────────────────────────────────
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: lex_platform
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Public Website (Next.js — port 3000) ──────────────────────────────────
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgrespassword@db:5432/lex_platform?schema=public"
+      NEXT_PUBLIC_APP_URL: "http://localhost:3000"
+      PAYSTACK_SECRET_KEY: "${PAYSTACK_SECRET_KEY}"
+      RESEND_API_KEY: "${RESEND_API_KEY}"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # ── Admin CMS (Next.js — port 3001) ──────────────────────────────────────
+  admin:
+    build:
+      context: .
+      dockerfile: apps/admin/Dockerfile
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgrespassword@db:5432/lex_platform?schema=public"
+      NEXTAUTH_URL: "http://localhost:3001"
+      AUTH_SECRET: "${AUTH_SECRET}"
+      CLOUDINARY_URL: "${CLOUDINARY_URL}"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

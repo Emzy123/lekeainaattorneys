@@ -1,0 +1,26 @@
+{
+  "name": "lex-platform",
+  "version": "1.0.0",
+  "description": "Global-Standard Law Firm Digital Infrastructure",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.16",
+    "@types/node": "^20.8.0",
+    "typescript": "^5.2.2"
+  },
+  "packageManager": "npm@9.8.1",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

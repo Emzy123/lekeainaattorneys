@@ -1,0 +1,27 @@
+{
+  "name": "@lex/database",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "dev": "prisma generate",
+    "build": "prisma generate",
+    "migrate": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "migrate:reset": "prisma migrate reset",
+    "seed": "tsx seed.ts",
+    "lint": "eslint \"prisma/**/*.ts\" --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.6.0",
+    "@lex/types": "file:../types"
+  },
+  "devDependencies": {
+    "prisma": "^5.6.0",
+    "typescript": "^5.2.2",
+    "eslint": "^8.57.0",
+    "tsx": "^4.6.0"
+  }
+}

@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand */
+  --lex-navy: #0A1628;
+  --lex-gold: #C9A84C;
+  --lex-gold-light: #E8C97A;
+  --lex-steel: #152338;
+  --lex-smoke: #EEF3F8;
+  
+  /* Extended Palette */
+  --lex-slate: #1E3A5F;
+  --lex-indigo: #2D4A6B;
+  --lex-silver: #8899AA;
+  --lex-ash: #C5CDD6;
+  
+  /* Semantic */
+  --lex-success: #0F5132;
+  --lex-warning: #7C4A00;
+  --lex-error: #7B1A1A;
+  --lex-info: #3D1F6E;
+  --lex-teal: #0D4A4A;
+  
+  /* Admin Palette */
+  --lex-obsidian: #0D0F14;
+  --lex-admin-dark: #151C2A;
+  --lex-panel-bg: #1E2D42;
+  --lex-content-area: #F0F4F8;
+}
+
+body {
+  background-color: var(--lex-admin-dark);
+  color: var(--lex-smoke);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--lex-gold);
+  color: #fff;
+}
