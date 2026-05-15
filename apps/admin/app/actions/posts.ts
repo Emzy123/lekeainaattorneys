@@ -104,7 +104,6 @@ export async function deletePost(id: string) {
     await prisma.blogPost.delete({ where: { id } });
     revalidatePath("/posts");
     revalidatePath("/blog");
-    return { success: true };
   } catch {
     throw new Error("Failed to delete post.");
   }

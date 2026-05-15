@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { RichTextEditor } from "@lex/ui";
 import { useRouter } from "next/navigation";
-import { updatePost } from "../../../../actions/posts";
+import { updatePost } from "../../../actions/posts";
 import { Loader2 } from "lucide-react";
 
 export default function EditPostForm({ post }: { post: any }) {

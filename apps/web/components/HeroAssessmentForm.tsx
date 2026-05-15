@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition, useState } from "react";
-import { submitConsultation } from "../actions/consultation";
+import { submitConsultation } from "../app/actions/consultation";
 import { Button } from "@lex/ui";
 import { CheckCircle2, Loader2 } from "lucide-react";
 

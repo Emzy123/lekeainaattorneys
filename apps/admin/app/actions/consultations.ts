@@ -23,6 +23,14 @@ export async function updateConsultationStatus(id: string, status: string, notes
   }
 }
 
+/** Form action wrapper for progressive enhancement (Next.js expects FormData). */
+export async function setConsultationStatusFromForm(formData: FormData) {
+  const id = formData.get("id") as string | null;
+  const status = formData.get("status") as string | null;
+  if (!id || !status) throw new Error("Missing consultation id or status.");
+  await updateConsultationStatus(id, status);
+}
+
 export async function deleteConsultation(id: string) {
   const session = await auth();
   if (!session?.user) throw new Error("Unauthorized");
@@ -30,7 +38,6 @@ export async function deleteConsultation(id: string) {
   try {
     await prisma.consultationRequest.delete({ where: { id } });
     revalidatePath("/consultations");
-    return { success: true };
   } catch {
     throw new Error("Failed to delete consultation.");
   }

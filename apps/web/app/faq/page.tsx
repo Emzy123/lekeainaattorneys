@@ -11,7 +11,7 @@ export default async function FaqPage() {
     orderBy: { order: 'asc' }
   });
 
-  const categories = Array.from(new Set(faqs.map(f => f.category || 'General')));
+  const categories: string[] = Array.from(new Set(faqs.map((f) => f.category ?? 'General')));
 
   return (
     <div className="bg-lex-smoke min-h-screen pb-24">

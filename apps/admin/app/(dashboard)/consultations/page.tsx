@@ -1,7 +1,7 @@
 import { prisma } from "@lex/database";
 import Link from "next/link";
 import { MessageSquare, Clock, CheckCircle2, XCircle, Eye, Calendar, Mail, Phone, MapPin } from "lucide-react";
-import { updateConsultationStatus } from "../../actions/consultations";
+import { setConsultationStatusFromForm } from "../../actions/consultations";
 import { Metadata } from "next";
 
 export const metadata: Metadata = { title: 'Consultations | LEX Admin' };
@@ -31,7 +31,7 @@ export default async function ConsultationsPage({
     _count: true,
   });
 
-  const countMap = counts.reduce((acc, c) => {
+  const countMap = counts.reduce((acc: Record<string, number>, c) => {
     acc[c.status] = c._count;
     return acc;
   }, {} as Record<string, number>);
@@ -141,7 +141,9 @@ export default async function ConsultationsPage({
                     <div className="flex items-center gap-1.5">
                       {(['REVIEWING', 'SCHEDULED', 'COMPLETED', 'DECLINED'] as const).map((s) => (
                         s !== req.status && (
-                          <form key={s} action={updateConsultationStatus.bind(null, req.id, s)}>
+                          <form key={s} action={setConsultationStatusFromForm}>
+                            <input type="hidden" name="id" value={req.id} />
+                            <input type="hidden" name="status" value={s} />
                             <button
                               type="submit"
                               title={`Mark as ${s}`}

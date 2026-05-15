@@ -53,7 +53,6 @@ export async function deleteFaq(id: string) {
   try {
     await prisma.fAQ.delete({ where: { id } });
     revalidatePath("/faq");
-    return { success: true };
   } catch {
     throw new Error("Failed to delete FAQ.");
   }

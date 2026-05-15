@@ -94,7 +94,6 @@ export async function deleteResource(id: string) {
     await prisma.resource.delete({ where: { id } });
     revalidatePath("/resources");
     revalidatePath("/shop");
-    return { success: true };
   } catch {
     throw new Error("Failed to delete resource.");
   }

@@ -1,7 +1,4 @@
-import NextAuth from "next-auth"
-import { auth as authConfig } from "./auth"
-
-const { auth } = NextAuth(authConfig as any)
+import { auth } from "./auth";
 
 export default auth((req) => {
   const isLoggedIn = !!req.auth

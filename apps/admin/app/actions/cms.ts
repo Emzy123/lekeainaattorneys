@@ -67,7 +67,6 @@ export async function deletePracticeArea(id: string) {
   try {
     await prisma.practiceArea.delete({ where: { id } });
     revalidatePath("/practice-areas");
-    return { success: true };
   } catch {
     throw new Error("Failed to delete practice area.");
   }
@@ -117,7 +116,6 @@ export async function deleteTeamMember(id: string) {
   try {
     await prisma.teamMember.delete({ where: { id } });
     revalidatePath("/team");
-    return { success: true };
   } catch {
     throw new Error("Failed to delete team member.");
   }
